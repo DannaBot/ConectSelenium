@@ -10,13 +10,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Clonar repositorio
+        uses: actions/checkout@v4
 
-      - name: Configurar Java
-        uses: actions/setup-java@v4
+      - name: Configurar Python
+        uses: actions/setup-python@v5
         with:
-          distribution: 'temurin'
-          java-version: '17'
+          python-version: '3.13'
+
+      - name: Instalar dependencias
+        run: |
+          pip install -r requirements.txt
 
       - name: Ejecutar pruebas
-        run: mvn test
+        run: |
+          pytest
